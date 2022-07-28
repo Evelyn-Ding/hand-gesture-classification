@@ -18,13 +18,7 @@ Usage - formats:
                                          yolov5s.xml                # OpenVINO
                                          yolov5s.engine             # TensorRT
                                          yolov5s.mlmodel            # CoreML (macOS-only)
-                                         yolov5s_saved_model        # Tensoarduino = serial.Serial(port='dev/ttyACM0', baudrate=115200, timeout=.1)
-                        def write_read(x):
-                            arduino.write(bytes(x, 'utf-8'))
-                            time.sleep(0.05)
-                            data = arduino.readline()
-                            return datarFlow Lite
-                                         yolov5s_edgetpu.tflite     # TensorFlow Edge TPU
+                                         yolov5s_saved_model        # Tensor
 """
 import serial
 import time
@@ -50,6 +44,7 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
                            increment_path, non_max_suppression, print_args, scale_coords, strip_optimizer, xyxy2xywh)
 from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, time_sync
+
 
 @torch.no_grad()
 def run(
@@ -176,7 +171,6 @@ def run(
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
                         
-            
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
